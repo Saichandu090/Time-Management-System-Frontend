@@ -9,6 +9,9 @@
             @if (registerForm.controls['firstName'].errors?.['required']) {
               <span>This is Required</span>
             }
+            @if (registerForm.controls['firstName'].errors?.['pattern']) {
+              <span>Should start with Capital and min 3 characters required</span>
+            }
           </div>
         }
         <input type="text" id="lastName" formControlName="lastName" name="lastName" placeholder="Last Name">
@@ -16,6 +19,9 @@
           <div class="text-danger">
             @if (registerForm.controls['lastName'].errors?.['required']) {
               <span>This is Required</span>
+            }
+            @if (registerForm.controls['lastName'].errors?.['pattern']) {
+              <span>Should start with Capital and min 3 characters required</span>
             }
           </div>
         }
@@ -32,6 +38,9 @@
           <div class="text-danger">
             @if (registerForm.controls['email'].errors?.['required']) {
               <span>This is Required</span>
+            }
+            @if (registerForm.controls['email'].errors?.['email']) {
+              <span>Please provide a valid email</span>
             }
           </div>
         }

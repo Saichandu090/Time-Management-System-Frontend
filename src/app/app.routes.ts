@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { loginGuard } from './guards/login.guard';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,13 @@ export const routes: Routes = [
   },
   {
     path:'',
-    component:LayoutComponent
+    component:LayoutComponent,
+    children:[
+      {
+        path:'layout',
+        component:LayoutComponent,
+        canActivate:[loginGuard]
+      }
+    ]
   }
 ];
