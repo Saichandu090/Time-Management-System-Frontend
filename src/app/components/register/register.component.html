@@ -1,0 +1,53 @@
+<div class="parent">
+  <div class="container">
+    <div class="card">
+      <h2>Register</h2>
+      <form [formGroup]="registerForm">
+        <input type="text" id="firstName" formControlName="firstName" name="firstName" placeholder="First Name">
+        @if (registerForm.controls['firstName'].touched) {
+          <div class="text-danger">
+            @if (registerForm.controls['firstName'].errors?.['required']) {
+              <span>This is Required</span>
+            }
+          </div>
+        }
+        <input type="text" id="lastName" formControlName="lastName" name="lastName" placeholder="Last Name">
+        @if (registerForm.controls['lastName'].touched) {
+          <div class="text-danger">
+            @if (registerForm.controls['lastName'].errors?.['required']) {
+              <span>This is Required</span>
+            }
+          </div>
+        }
+        <input type="date" id="dob" formControlName="dob" name="dob" placeholder="Date of Birth">
+        @if (registerForm.controls['dob'].touched) {
+          <div class="text-danger">
+            @if (registerForm.controls['dob'].errors?.['required']) {
+              <span>This is Required</span>
+            }
+          </div>
+        }
+        <input type="text" id="email" formControlName="email" name="email" placeholder="Email">
+        @if (registerForm.controls['email'].touched) {
+          <div class="text-danger">
+            @if (registerForm.controls['email'].errors?.['required']) {
+              <span>This is Required</span>
+            }
+          </div>
+        }
+        <input type="password" id="password" formControlName="password" name="password" placeholder="Password">
+        @if (registerForm.controls['password'].touched) {
+          <div class="text-danger">
+            @if (registerForm.controls['password'].errors?.['required']) {
+              <span>This is Required</span>
+            }
+          </div>
+        }
+        <button type="submit" class="btn btn-info mt-2" (click)="onRegister()">Register</button>
+
+      </form>
+      <p class="text-center mt-2">Already have an Account?</p>
+      <button type="submit" class="btn btn-info" [routerLink]="'/login'">Login</button>
+    </div>
+  </div>
+</div>
