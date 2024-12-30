@@ -49,7 +49,7 @@ export class LoginComponent {
           localStorage.setItem("CurrentUser",JSON.stringify(this.loggedInUser));
           localStorage.setItem(Constant.LOGIN_TOKEN,res.message);
           this.snackBar.open('Login Success', '', { duration: 3000 });
-          this.router.navigateByUrl("/layout");
+          this.router.navigateByUrl("/homepage");
         }
       },
       error: (res: IJsonResponse) => {

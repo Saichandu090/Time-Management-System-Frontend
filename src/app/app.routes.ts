@@ -3,6 +3,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { loginGuard } from './guards/login.guard';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 export const routes: Routes = [
   {
@@ -23,8 +24,8 @@ export const routes: Routes = [
     component:LayoutComponent,
     children:[
       {
-        path:'layout',
-        component:LayoutComponent,
+        path:'homepage',
+        component:HomepageComponent,
         canActivate:[loginGuard]
       }
     ]
