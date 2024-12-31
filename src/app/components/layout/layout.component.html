@@ -1,1 +1,9 @@
-<button class="btn btn-danger" (click)="onLogOut()">LogOut</button>
+<nav class="navbar navbar-light bg-light-blue" style="background-color: #add8e6; padding-top: 20px; padding-bottom: 20px;">
+  <a class="navbar-brand mx-4">Welcome to Time Management System</a>
+  <button class="btn btn-info">{{loggedInUser.email}}</button>
+    <button mat-button [matMenuTriggerFor]="menu" class="btn btn-outline-info my-2 my-sm-0 mx-4">Menu</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onLogOut()">Logout</button>
+    </mat-menu>
+</nav>
+<router-outlet/>

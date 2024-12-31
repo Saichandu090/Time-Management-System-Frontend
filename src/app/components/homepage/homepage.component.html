@@ -6,11 +6,19 @@
     <span>{{ms}}</span>
   </div>
   <div class="button-container">
-    <button class="btn-play-pause ripple">
-      <i class="fas fa-play"></i>
+    <button class="btn-play-pause ripple" (click)="start()">
+      @if (!running) {
+        <i class="fas fa-play"></i>
+      }
+      @else if(running){
+        <i class="fas fa-pause"></i>
+      }
     </button>
-    <button>
+    <button class="ripple" (click)="reset()">
       <i class="fas fa-redo-alt"></i>
     </button>
   </div>
 </div>
+
+{{time}}
+{{noOfBreaks}}
