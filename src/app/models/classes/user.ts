@@ -43,3 +43,11 @@ export class AdminRegister{
     this.role='ADMIN'
   }
 }
+
+export class LogOut{
+  loginId:number
+
+  constructor(){
+    this.loginId=0
+  }
+}

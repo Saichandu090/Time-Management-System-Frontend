@@ -1,3 +1,4 @@
+@if (loggedInUser.role==='USER') {
 <div class="sw-container">
   <div class="stopwatch">
     <span>{{hr}} : </span>
@@ -8,10 +9,10 @@
   <div class="button-container">
     <button class="btn-play-pause ripple" (click)="start()">
       @if (!running) {
-        <i class="fas fa-play"></i>
+      <i class="fas fa-play"></i>
       }
       @else if(running){
-        <i class="fas fa-pause"></i>
+      <i class="fas fa-pause"></i>
       }
     </button>
     <button class="ripple" (click)="reset()">
@@ -19,6 +20,40 @@
     </button>
   </div>
 </div>
+}@else if (loggedInUser.role==='ADMIN') {
 
-{{time}}
-{{noOfBreaks}}
+<p-table [value]="userSessions" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template #header>
+    <tr>
+      <th>Session_Id</th>
+      <th>User-Email</th>
+      <th>Login-Time</th>
+      <th>Logout-Time</th>
+      <th>Session-Time</th>
+      <th>No of Breaks</th>
+      <th>Break-Time</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-product>
+    <tr>
+      <td>{{ product.id }}</td>
+      <td>{{ loggedInUser.email }}</td>
+      <td>{{ product.loginTime }}</td>
+      <td>{{ product.logoutTime }}</td>
+      @if (product.sessionTime===null) {
+        <td>{{product.sessionTime}}</td>
+      }@else {
+        <td>{{convertDuration(product.sessionTime)}}</td>
+      }
+
+      <td>{{product.noOfBreaks}}</td>
+      @if (product.breakTime===null) {
+        <td>{{product.breakTime}}</td>
+      }@else {
+        <td>{{convertDuration(product.breakTime)}}</td>
+      }
+    </tr>
+  </ng-template>
+</p-table>
+
+}

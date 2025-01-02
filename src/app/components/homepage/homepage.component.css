@@ -58,3 +58,7 @@
     transition: background 0s;
   }
 }
+
+table {
+  width: 100%;
+}

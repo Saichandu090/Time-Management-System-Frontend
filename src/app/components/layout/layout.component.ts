@@ -6,6 +6,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
+import { LogOut } from '../../models/classes/user';
 
 
 @Component({
@@ -31,17 +32,20 @@ export class LayoutComponent implements OnInit{
     loginId: 0
   }
 
+  logoutObj:LogOut=new LogOut();
+
   updateCurrentUser(): void{
     const currentUser = localStorage.getItem("CurrentUser");
     if (currentUser) {
       this.loggedInUser = JSON.parse(currentUser);
+      this.logoutObj.loginId=this.loggedInUser.loginId;
     }
   }
 
   onLogOut() {
     const rs = confirm("Do you want to logout?");
     if (rs) {
-      this.userService.onLogOut(this.loggedInUser.loginId, this.loggedInUser).subscribe({
+      this.userService.onLogOut(this.logoutObj).subscribe({
         next: (res: IJsonResponse) => {
           this.snackBar.open(res.message, '', { duration: 3000 });
           localStorage.clear();
