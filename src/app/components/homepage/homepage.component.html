@@ -1,3 +1,4 @@
+@if (loggedInUser.role==='USER') {
 <div class="sw-container">
   <div class="stopwatch">
     <span>{{hr}} : </span>
@@ -6,11 +7,56 @@
     <span>{{ms}}</span>
   </div>
   <div class="button-container">
-    <button class="btn-play-pause ripple">
+    <button class="btn-play-pause ripple" (click)="start()">
+      @if (!running) {
       <i class="fas fa-play"></i>
+      }
+      @else if(running){
+      <i class="fas fa-pause"></i>
+      }
     </button>
-    <button>
+    <button class="ripple" (click)="reset()">
       <i class="fas fa-redo-alt"></i>
     </button>
   </div>
 </div>
+}@else if (loggedInUser.role==='ADMIN') {
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Session-Id</th>
+      <th scope="col">User-Email</th>
+      <th scope="col">Login-Time</th>
+      <th scope="col">Logout-Time</th>
+      <th scope="col">Session-Time</th>
+      <th scope="col">No of Breaks</th>
+      <th scope="col">Break-Time</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of userSessions; track $index) {
+    <tr>
+      <td scope="row">{{item.id}}</td>
+      <td scope="row">{{item.email}}</td>
+      <td scope="row">{{item.loginTime}}</td>
+      <td scope="row">{{item.logoutTime}}</td>
+      @if (item.sessionTime===null) {
+      <td>{{item.sessionTime}}</td>
+      }@else {
+      <td>{{convertDuration(item.sessionTime)}}</td>
+      }
+      <td scope="row">{{item.noOfBreaks}}</td>
+      @if (item.breakTime===null) {
+      <td>{{item.breakTime}}</td>
+      }@else {
+      <td>{{convertDuration(item.breakTime)}}</td>
+      }
+      <td><button class="btn btn-danger" (click)="deleteSession(item.id)">Delete</button></td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+}

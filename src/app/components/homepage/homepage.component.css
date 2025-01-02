@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vw;
+  height: auto;
 }
 
 .sw-container {
@@ -57,4 +57,8 @@
     background-size: 100%;
     transition: background 0s;
   }
+}
+
+table{
+  margin: 20px;
 }
