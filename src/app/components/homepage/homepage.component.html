@@ -22,38 +22,41 @@
 </div>
 }@else if (loggedInUser.role==='ADMIN') {
 
-<p-table [value]="userSessions" [tableStyle]="{ 'min-width': '50rem' }">
-  <ng-template #header>
+<table class="table">
+  <thead>
     <tr>
-      <th>Session_Id</th>
-      <th>User-Email</th>
-      <th>Login-Time</th>
-      <th>Logout-Time</th>
-      <th>Session-Time</th>
-      <th>No of Breaks</th>
-      <th>Break-Time</th>
+      <th scope="col">Session-Id</th>
+      <th scope="col">User-Email</th>
+      <th scope="col">Login-Time</th>
+      <th scope="col">Logout-Time</th>
+      <th scope="col">Session-Time</th>
+      <th scope="col">No of Breaks</th>
+      <th scope="col">Break-Time</th>
+      <th scope="col">Action</th>
     </tr>
-  </ng-template>
-  <ng-template #body let-product>
+  </thead>
+  <tbody>
+    @for (item of userSessions; track $index) {
     <tr>
-      <td>{{ product.id }}</td>
-      <td>{{ loggedInUser.email }}</td>
-      <td>{{ product.loginTime }}</td>
-      <td>{{ product.logoutTime }}</td>
-      @if (product.sessionTime===null) {
-        <td>{{product.sessionTime}}</td>
+      <td scope="row">{{item.id}}</td>
+      <td scope="row">{{item.email}}</td>
+      <td scope="row">{{item.loginTime}}</td>
+      <td scope="row">{{item.logoutTime}}</td>
+      @if (item.sessionTime===null) {
+      <td>{{item.sessionTime}}</td>
       }@else {
-        <td>{{convertDuration(product.sessionTime)}}</td>
+      <td>{{convertDuration(item.sessionTime)}}</td>
       }
-
-      <td>{{product.noOfBreaks}}</td>
-      @if (product.breakTime===null) {
-        <td>{{product.breakTime}}</td>
+      <td scope="row">{{item.noOfBreaks}}</td>
+      @if (item.breakTime===null) {
+      <td>{{item.breakTime}}</td>
       }@else {
-        <td>{{convertDuration(product.breakTime)}}</td>
+      <td>{{convertDuration(item.breakTime)}}</td>
       }
+      <td><button class="btn btn-danger" (click)="deleteSession(item.id)">Delete</button></td>
     </tr>
-  </ng-template>
-</p-table>
+    }
+  </tbody>
+</table>
 
 }

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { LogOut, UserLogin, UserRegister } from '../models/classes/user';
 import { IJsonResponse, ILoggedInUser } from '../models/interfaces/response';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Constant } from '../constants/constant';
 
 @Injectable({
@@ -11,6 +11,8 @@ import { Constant } from '../constants/constant';
 export class UserService {
 
   http: HttpClient = inject(HttpClient);
+
+  onSessionChange: Subject<boolean> = new Subject<boolean>();
 
   baseURL: string = 'http://localhost:8080/';
 
@@ -49,5 +51,10 @@ export class UserService {
   getAllSessions(): Observable<IJsonResponse> {
     const headers = this.getHeaders();
     return this.http.get<IJsonResponse>(this.baseURL + 'getUserSessions', { headers });
+  }
+
+  deleteSession(sessionId: number): Observable<IJsonResponse> {
+    const headers = this.getHeaders();
+    return this.http.delete<IJsonResponse>(`${this.baseURL}deleteSession/${sessionId}`, { headers });
   }
 }

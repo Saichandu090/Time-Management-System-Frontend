@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 30vw;
+  height: auto;
 }
 
 .sw-container {
@@ -59,6 +59,6 @@
   }
 }
 
-table {
-  width: 100%;
+table{
+  margin: 20px;
 }

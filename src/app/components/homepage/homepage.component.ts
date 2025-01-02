@@ -9,7 +9,7 @@ import { TableModule } from 'primeng/table';
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [MatTableModule,TableModule],
+  imports: [MatTableModule, TableModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css'
 })
@@ -117,6 +117,11 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     this.updateCurrentUser();
     this.getUserSessions();
+    this.userService.onSessionChange.subscribe((res:boolean)=>{
+      if(res){
+        this.getUserSessions();
+      }
+    })
   }
 
   userSessions: ISession[] = [];
@@ -137,7 +142,20 @@ export class HomepageComponent implements OnInit {
   }
 
   deleteSession(id: number) {
-
+    const rs = confirm("Do you want to delete this session?");
+    if (rs) {
+      this.userService.deleteSession(id).subscribe({
+        next: (res: IJsonResponse) => {
+          if (res) {
+            this.snackBar.open(res.message, '', { duration: 3000 });
+            this.userService.onSessionChange.next(true);
+          }
+        },
+        error: (res: IJsonResponse) => {
+          this.snackBar.open(res.message, '', { duration: 3000 })
+        }
+      })
+    }
   }
 
 

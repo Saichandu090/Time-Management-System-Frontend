@@ -21,6 +21,7 @@ export interface ISession {
   loginTime: any;
   logoutTime: any;
   noOfBreaks: number;
-  sessionTime: number;
-  breakTime: number;
+  sessionTime: string;
+  breakTime: string;
+  email:string;
 }
