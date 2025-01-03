@@ -3,16 +3,17 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: auto;
+  height: 100vm;
 }
-
 .sw-container {
   background-image: linear-gradient(to right, #6288df, #7774ed);
-  padding: 15px 20px;
+  margin: 100px;
+  padding: 35px 20px;
   border-radius: 10px;
   color: #fff;
   text-align: center;
   width: 300px;
+  height: auto;
   box-shadow: 0 3px 6px rgba(129, 129, 129, 0.16), 0 3px 6px rgba(105, 105, 105, 0.23);
 }
 
